@@ -3,11 +3,9 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import Hello from './components/Hello';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Hello name="TypeScript" enthusiasmLevel={10} />,
     <App />
   </React.StrictMode>,
   document.getElementById('root')

@@ -34,7 +34,23 @@ class Search extends React.Component<Props, State> {
           });
         }
       
-      
+  handleKeywordKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) =>{
+
+  if( e.key === 'Enter' ){
+    const url_append = this.props.url + this.state.search_state;
+
+    fetch(url_append, {method: 'GET'})
+      .then(res => res.json())
+      .then(
+        (result) => {
+          console.log(result)
+          this.setState({
+            search_state: result.body
+          });
+          });
+    
+  }
+};
 
     handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       this.setState({search_state: e.target.value});
@@ -45,9 +61,10 @@ class Search extends React.Component<Props, State> {
       return (
         <div className="search">
           <div className="searchField">
-            <input type="text" placeholder={this.props.search_placeholder} value={this.state.search_state} onChange={this.handleChange}/>
-            <button className="Button" onClick={this.onSearch.bind(this)}>{this.props.button}</button>
+            <input type="text" placeholder={this.props.search_placeholder} value={this.state.search_state} onKeyPress={this.handleKeywordKeyPress}  onChange={this.handleChange}/>
+            
           </div>
+          <div><button className="Button" onClick={this.onSearch.bind(this)}>{this.props.button}</button></div>
         </div>
       );
     }
